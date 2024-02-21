@@ -1,4 +1,4 @@
-# k8s Resources
+# Resources
 
 ## 1. Manifest
 
