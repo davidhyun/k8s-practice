@@ -1,0 +1,44 @@
+# 각 노드에 데몬셋으로 메트릭 수집 에이전트(node-exporter) 설치
+apiVersion: apps/v1
+kind: DaemonSet    
+metadata:
+  name: node-exporter
+  namespace: monitoring
+  labels:
+    k8s-app: node-exporter
+spec:
+  selector:
+    matchLabels:
+      k8s-app: node-exporter
+  template:
+    metadata:
+      labels:
+        k8s-app: node-exporter
+    spec:
+      containers:
+      - image: prom/node-exporter
+        name: node-exporter
+        ports:
+        - containerPort: 9100
+          protocol: TCP
+          name: http
+
+---
+
+# node-exporter 파드를 외부에서 접속할 수 있도록 서비스 생성
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: node-exporter
+  name: node-exporter
+  namespace: kube-system
+spec:
+  ports:
+  - name: http
+    port: 9100
+    nodePort: 31672
+    protocol: TCP
+  type: NodePort
+  selector:
+    k8s-app: node-exporter

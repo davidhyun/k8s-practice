@@ -1,0 +1,17 @@
+# 외부에서 프로메테우스 파드에 접근하기 위한 서비스 설정
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9090'
+spec:
+  selector:
+    app: prometheus-server
+  type: NodePort    
+  ports:
+    - port: 8080
+      targetPort: 9090
+      nodePort: 30001
