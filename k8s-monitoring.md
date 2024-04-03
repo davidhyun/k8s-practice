@@ -67,7 +67,7 @@ $ kubectl apply -f grafana.yaml
   ```
 
   	- Cluster-IP : 10.99.78.18
-
+  	
   	- URL : `http://<Cluster-IP>:8080`
 
 
@@ -98,6 +98,8 @@ $ kubectl decribe pod pod-with-cpu-range
 
 
 ### 3.2. AutoScaling
+
+![HorizontalPodAutoScaler](https://res.cloudinary.com/practicaldev/image/fetch/s--CuCCNVY7--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://github.com/vumdao/aws-eks-the-hard-way/blob/master/hpa/img/hpa-flow.png%3Fraw%3Dtrue)
 
 - 파드의 자원 사용률이 너무 낮거나 높을 때 리소스의 크기를 조정
 - 자원 사용량의 제한(LimitRange)은 서비스 속도에 문제가 발생할 수 있으므로 서비스에 어떠한 영향도 주지 않으면서 빠른 속도를 보장하기 위해 사용하는 것이 오토스케일링이다.
